@@ -1,8 +1,12 @@
 spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
   datasource:
     url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-
   h2:
     console:
       enabled: true  # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
