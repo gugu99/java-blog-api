@@ -5,9 +5,10 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: true
-  datasource:
+  datasource: # 데이터베이스 정보 추가
     url: jdbc:h2:mem:testdb
-  h2:
+    username: sa
+  h2: # H2 콘솔 활성화
     console:
       enabled: true  # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
       #path: /h2-console  # H2 Console의 Path
