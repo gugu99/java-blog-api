@@ -12,3 +12,6 @@ spring:
     console:
       enabled: true  # H2 Console을 사용할지 여부 (H2 Console은 H2 Database를 UI로 제공해주는 기능)
       #path: /h2-console  # H2 Console의 Path
+jwt:
+  issuer: gugu99
+  secret_key: fvlishgvaiorjwfopwweuifguydjkhscndjnckjadklfhilshkjjcksdfnvhawroifhjejdsickdjnjkvcdfbhjg
