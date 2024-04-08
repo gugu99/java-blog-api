@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
+/*
 @RequiredArgsConstructor
 @Configuration
 public class WebSecurityConfig {
@@ -45,13 +46,15 @@ public class WebSecurityConfig {
     }
 
     // 7. 인증 관리자 관련 설정
-    /*
+    */
+/*
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailService).passwordEncoder(bCryptPasswordEncoder());
         return auth.build();
     }
-    */
+    *//*
+
 
     // 9. 패스워드 인코더로 사용할 빈 등록
     @Bean
@@ -59,3 +62,6 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+
+
+*/
