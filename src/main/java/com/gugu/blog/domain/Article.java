@@ -22,6 +22,9 @@ public class Article {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @Column(name = "author", nullable = false)
+    private String author;
+
     @Column(name = "title", nullable = false) // 'title'이라는 not null 컬럼과 매핑
     private String title;
 
@@ -37,7 +40,8 @@ public class Article {
     private LocalDateTime updatedAt;
 
     @Builder // 빌더 패턴으로 객체 생성
-    public Article(String title, String content) {
+    public Article(String author, String title, String content) {
+        this.author = author;
         this.title = title;
         this.content = content;
     }

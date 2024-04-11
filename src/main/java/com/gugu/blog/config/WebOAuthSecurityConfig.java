@@ -1,6 +1,8 @@
 package com.gugu.blog.config;
 
 import com.gugu.blog.config.jwt.TokenProvider;
+import com.gugu.blog.config.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import com.gugu.blog.config.oauth.OAuth2SuccessHandler;
 import com.gugu.blog.config.oauth.OAuth2UserCustomService;
 import com.gugu.blog.repository.RefreshTokenRepository;
 import com.gugu.blog.service.UserService;
@@ -12,15 +14,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
-
 @RequiredArgsConstructor
 @Configuration
 public class WebOAuthSecurityConfig {
@@ -63,7 +62,7 @@ public class WebOAuthSecurityConfig {
                 .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
                 .and()
                 .successHandler(oAuth2SuccessHandler()) // 5. 인증 성공 시 실행할 핸들러
-                .UserInfoEndpoint()
+                .userInfoEndpoint()
                 .userService(oAuth2UserCustomService);
 
         http.logout()
@@ -78,18 +77,18 @@ public class WebOAuthSecurityConfig {
     }
 
     @Bean
-    private OAuth2SuccessHandler oAuth2SuccessHandler() {
-        return new Oauth2SuccessHandler(tokenProvider, refreshTokenRepository,
+    public OAuth2SuccessHandler oAuth2SuccessHandler() {
+        return new OAuth2SuccessHandler(tokenProvider, refreshTokenRepository,
                 oAuth2AuthorizationRequestBasedOnCookieRepository(), userService);
     }
 
     @Bean
-    private AuthorizationRequestRepository<OAuth2AuthorizationRequest> oAuth2AuthorizationRequestBasedOnCookieRepository() {
+    public OAuth2AuthorizationRequestBasedOnCookieRepository oAuth2AuthorizationRequestBasedOnCookieRepository() {
         return new OAuth2AuthorizationRequestBasedOnCookieRepository();
     }
 
     @Bean
-    private TokenAuthenticationFilter tokenAuthenticationFilter() {
+    public TokenAuthenticationFilter tokenAuthenticationFilter() {
         return new TokenAuthenticationFilter(tokenProvider);
     }
 
